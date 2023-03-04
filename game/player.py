@@ -60,7 +60,7 @@ class Player(pg.sprite.Sprite):
             if self.direction.x != 0:
                 self.status = self.animate()
             else:
-                self.status = 'art_assets/pet-rock/rock-pet-animation-stand-32-32.png'
+                self.status = ''
         
 
     #animation function that makes sure it is always animating
