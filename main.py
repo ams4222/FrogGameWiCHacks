@@ -22,7 +22,7 @@ while True:
         if fingerUp == [1, 1, 1, 1, 1]:
             cv2.putText(frame, "Finger Count: 5", (20, 460),cv2.FONT_HERSHEY_COMPLEX, 1, (188, 214, 189), 1, cv2.LINE_AA)
             cv2.putText(frame, "Jumping", (440, 460),cv2.FONT_HERSHEY_COMPLEX, 1, (188, 214, 189), 1, cv2.LINE_AA)
-        if fingerUp == [0, 1, 1, 0, 0]:
+        if fingerUp == [0, 1, 0, 0, 0]:
             cv2.putText(frame, "Finger Count: 2", (20, 460),cv2.FONT_HERSHEY_COMPLEX, 1, (188, 214, 189), 1, cv2.LINE_AA)
             cv2.putText(frame, "Diving", (440, 460),cv2.FONT_HERSHEY_COMPLEX, 1, (188, 214, 189), 1, cv2.LINE_AA)
     cv2.imshow("Frame", frame)
