@@ -14,7 +14,7 @@ FPS = 60
 
 SCREEN_WIDTH = 1200 #probs should change
 SCREEN_HEIGHT = 900 #probs should change
-FLOOR = 610
+FLOOR = 440
 
 def vertical_collision(player): 
     player.update_gravity()
@@ -197,8 +197,7 @@ def main():
             # collision detection
             frog_rect = frog.rect
             if frog_rect.colliderect(o_rect) or frog_rect.colliderect(o2_rect):
-                print("collided")
-                #return
+                game_is_running = False
 
         for event in pg.event.get():
             if event.type == pg.QUIT:
