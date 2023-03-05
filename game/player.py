@@ -11,7 +11,7 @@ class Player(pg.sprite.Sprite):
         #resizes all images to correct tile size
 
         self.sprites = []
-        size = (50, 50)
+        size = (64, 64)
         self.sprites.append(pg.transform.scale(pg.image.load('assets/froggy.png'), size))
         self.sprites.append(pg.transform.scale(pg.image.load('assets/froggy.png'), size))
         self.sprites.append(pg.transform.scale(pg.image.load('assets/froggy.png'), size))
