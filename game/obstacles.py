@@ -1,16 +1,25 @@
 import pygame as pg
 from player import *
+import random
 
 class Obstacle(pg.sprite.Sprite):
-    def __init__(self, pos):
+    def __init__(self, obstacle_x, obstacle2_x, pos):
         super().__init__()
         # later, randomize 
-        self.image = pg.image.load("assets/reeds.png").convert_alpha()
+        self.image = pg.image.load("assets/froggy.png").convert_alpha()
         self.rect = self.image.get_rect(topleft = pos)
+        self.obstacle_x = obstacle_x
+        self.obstacle2_x = obstacle2_x
     
-    def update(self, shift_x, shift_y):
-        self.rect.x += shift_x
-        self.rect.y += shift_y
+    def update(self, shift_x):
+        self.rect.x -= shift_x
+        if(abs(self.obstacle_x - self.obstacle2_x) < 200):
+            self.obstacle2_x += 150
+        obstacle_rand = random.randint(1200, 1300)
+        if self.obstacle_x < -300:
+            self.obstacle_x = obstacle_rand
+        if self.obstacle2_x < -300:
+            self.obstacle2_x = obstacle_rand + 100
 '''
 class Cactus(pygame.sprite.Sprite):
     def __init__(self, speed=5, sx=-1, sy=-1):
