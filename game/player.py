@@ -72,13 +72,8 @@ class Player(pg.sprite.Sprite):
 
     def key_input(self):
         keys = pg.key.get_pressed()
-        if keys[pg.K_RIGHT]:
-            self.direction.x = 1
-        elif keys[pg.K_LEFT]:
-            self.direction.x = -1
-        else:
-            self.direction.x = 0
-        if keys[pg.K_SPACE] and self.on_floor:
+        self.direction.x = 0
+        if keys[pg.K_SPACE]:
             self.jump()
     
     #gravity for player
@@ -103,7 +98,7 @@ class Player(pg.sprite.Sprite):
               self.is_animating = False
         else:
             self.is_animating = False
-            self.status = ''
+            self.status = 'assets/froggy.png'
 
             self.image = self.sprites[int(self.current_sprite)]
         self.animate()
