@@ -48,6 +48,7 @@ def main():
     player = pg.sprite.GroupSingle()
     player.add(frog)
 
+    gameover = pg.image.load("assets/gameover.png").convert()
     obstacle = pg.image.load("assets/reeds.png").convert_alpha()
     obstacle = pg.transform.rotozoom(obstacle, 0, 0.5)
     obstacle2 = pg.image.load("assets/reeds.png").convert_alpha()
@@ -61,7 +62,7 @@ def main():
         obstacle2 = pg.transform.rotozoom(obstacle2, 0, 0.45)
     # always two obstacles being constantly updated 
     obstacle_x = 700
-    obstacle_speed = 5
+    obstacle_speed = 8
     obstacle2_x = 1100
 
     detector = HandDetector(detectionCon = 0.8, maxHands = 1)
@@ -90,18 +91,6 @@ def main():
     #creates the frame with video to detect hand
     start = True
     while True:
-
-        if not game_is_running:
-            text = pg.font.SysFont("assets/Candycolouredclown-x2vq.otf", 64).render("Game over!", True, (188, 214, 189))
-            tr = text.get_rect()
-            tr.center = (1200 / 2, 900 / 2)
-            screen.blit(text, tr)
-            pg.display.update()
-            pg.time.wait(3000)
-            video.release()
-            cv2.destroyAllWindows()
-            pg.quit()
-            sys.exit()
 
         #imgBg = cv2.imread("game/assets/scrollbackground.png")
 
@@ -181,7 +170,26 @@ def main():
                     if event.key == pg.K_k: 
                         start = False
 
-        if not start:
+        
+        if not game_is_running:
+            #text = pg.font.SysFont("assets/Candycolouredclown-x2vq.otf", 64).render("Game over!", True, (188, 214, 189))
+            # tr = text.get_rect()
+            # tr.center = (1200 / 2, 900 / 2)
+            # screen.blit(text, tr)
+            screen.blit(gameover, (0, 0))
+            pg.display.update()
+            for event in pg.event.get(): 
+                if event.type == pg.KEYDOWN:
+                    if event.key == pg.K_SPACE: 
+                        game_is_running = True
+                    if event.key == pg.K_ESCAPE: 
+                        video.release()
+                        cv2.destroyAllWindows()
+                        pg.quit()
+                        sys.exit()
+
+
+        if not start and game_is_running:
             for i in range(0, tiles):
                 screen.blit(bg, (i * bg_width + scroll, 0))
 
