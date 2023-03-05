@@ -1,5 +1,6 @@
 import pygame as pg
 import math
+#from game import player
 import player as p
 import random
 
@@ -8,7 +9,7 @@ FPS = 60
 
 SCREEN_WIDTH = 1200 #probs should change
 SCREEN_HEIGHT = 900 #probs should change
-FLOOR = 610
+FLOOR = 440
 
 def vertical_collision(player): 
     player.update_gravity()
@@ -43,11 +44,11 @@ def main():
 
     # always two obstacles being constantly updated 
     obstacle = pg.image.load("assets/reeds.png").convert_alpha()
-    obstacle = pg.transform.rotozoom(obstacle, 0, 0.7)
+    obstacle = pg.transform.rotozoom(obstacle, 0, 0.5)
     obstacle_x = 700
     obstacle_speed = 5
     obstacle2 = pg.image.load("assets/reeds.png").convert_alpha()
-    obstacle2 = pg.transform.rotozoom(obstacle2, 0, 0.7)
+    obstacle2 = pg.transform.rotozoom(obstacle2, 0, 0.5)
     obstacle2_x = 1100
 
 
@@ -63,6 +64,7 @@ def main():
         vertical_collision(frog)
         player.update()
         player.draw(screen)
+        
 
         if abs(scroll) > bg_width:
             scroll = 0
@@ -70,19 +72,21 @@ def main():
         # obstacle updating 
         if(abs(obstacle_x - obstacle2_x) < 200):
             obstacle2_x += 150
-        o_rect = screen.blit(obstacle, (obstacle_x, 320))
+        o_rect = screen.blit(obstacle, (obstacle_x, 360))
         obstacle_x -= obstacle_speed
         obstacle_rand = random.randint(1200, 1300)
         if obstacle_x < -300:
             obstacle_x = obstacle_rand
-        o2_rect = screen.blit(obstacle2, (obstacle2_x, 320))
+        o2_rect = screen.blit(obstacle2, (obstacle2_x, 360))
+        
         obstacle2_x -= obstacle_speed
         if obstacle2_x < -300:
             obstacle2_x = obstacle_rand + 100
 
         # collision detection
         frog_rect = frog.rect
-        if frog_rect.colliderect(o_rect) or frog_rect.colliderect(o2_rect):
+        
+        if o_rect.colliderect(frog_rect) or o2_rect.colliderect(frog_rect):
             print("collided")
             #return
 

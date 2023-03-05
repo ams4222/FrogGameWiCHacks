@@ -23,7 +23,8 @@ class Player(pg.sprite.Sprite):
         #loads idle image and makes sure the player is touching ground
 
         self.image = pg.image.load("assets/froggy.png").convert_alpha()
-        self.image = pg.transform.rotozoom(self.image, 0, ((tile_size/2)/14))
+        #((tile_size/2)/14)
+        self.image = pg.transform.rotozoom(self.image, 0, 0.5)
         self.rect = self.image.get_rect(topleft = pos)
 
         # direction has both x and y
@@ -71,8 +72,8 @@ class Player(pg.sprite.Sprite):
         keys = pg.key.get_pressed()
         self.direction.x = 0
         if keys[pg.K_SPACE]:
-            # if(self.on_floor):
-            #     self.jump()
+            if(self.on_floor):
+                 self.jump()
             pass
         if keys[pg.K_u]:
             self.swimming = True
