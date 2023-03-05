@@ -48,6 +48,7 @@ class Player(pg.sprite.Sprite):
         self.on_ceiling = False
         self.on_floor = False
         self.facing_right = True
+        self.swimming = False
 
         #function for animations based on player movement
 
@@ -72,14 +73,12 @@ class Player(pg.sprite.Sprite):
 
     def key_input(self):
         keys = pg.key.get_pressed()
-        if keys[pg.K_RIGHT]:
-            self.direction.x = 1
-        elif keys[pg.K_LEFT]:
-            self.direction.x = -1
-        else:
-            self.direction.x = 0
-        if keys[pg.K_SPACE] and self.on_floor:
+        self.direction.x = 0
+        if keys[pg.K_SPACE]:
             self.jump()
+        if keys[pg.K_u]:
+            self.swimming = True
+            self.down()
     
     #gravity for player
 
@@ -89,6 +88,11 @@ class Player(pg.sprite.Sprite):
 
     def jump(self):
         self.direction.y = self.jump_speed 
+        self.gravity = 0.8
+    
+    def down(self):
+        self.direction.y = -self.jump_speed 
+        self.gravity = -0.8
 
     #update function that implements all above functions to properly run the player class
 
@@ -103,7 +107,7 @@ class Player(pg.sprite.Sprite):
               self.is_animating = False
         else:
             self.is_animating = False
-            self.status = ''
+            self.status = 'assets/froggy.png'
 
             self.image = self.sprites[int(self.current_sprite)]
         self.animate()
