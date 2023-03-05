@@ -4,12 +4,12 @@ import math
 clock = pg.time.Clock()
 FPS = 60
 
-SCREEN_WIDTH = 1000 #probs should change
-SCREEN_HEIGHT = 600 #probs should change
+SCREEN_WIDTH = 1200 #probs should change
+SCREEN_HEIGHT = 900 #probs should change
 
 screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-bg = pg.image.load("assets/lilypad.png").convert()
+bg = pg.image.load("assets/scrollbackground.png").convert()
 bg_width = bg.get_width()
 
 scroll = 0
