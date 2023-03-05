@@ -16,6 +16,8 @@ SCREEN_WIDTH = 1200 #probs should change
 SCREEN_HEIGHT = 900 #probs should change
 FLOOR = 440
 
+pg.init()
+
 def vertical_collision(player): 
     player.update_gravity()
     if player.rect.bottom > FLOOR and not player.swimming: 
@@ -50,7 +52,7 @@ def main():
     obstacle = pg.image.load("assets/reeds.png").convert_alpha()
     obstacle = pg.transform.rotozoom(obstacle, 0, 0.5)
     obstacle_x = 700
-    obstacle_speed = 5
+    obstacle_speed = 8
     obstacle2 = pg.image.load("assets/reeds.png").convert_alpha()
     obstacle2 = pg.transform.rotozoom(obstacle2, 0, 0.5)
     obstacle2_x = 1100
@@ -58,6 +60,8 @@ def main():
     detector = HandDetector(detectionCon = 0.8, maxHands = 1)
 
     space_key_pressed = sp
+
+    tut = pg.image.load("assets/tutorial.png")
 
     time.sleep(2)
     current_key_pressed = set()
@@ -67,6 +71,7 @@ def main():
     video.set(4, 480)
     game_is_running = True
     screen = pg.display.set_mode((1200, 900))
+    count = 0
 
     #frog_img = pygame.image.load("game/assets/froggy.png")
     #frog_img = pygame.transform.scale(frog_img, (frog_img.get_width() / 6, frog_img.get_height() / 6))
@@ -80,12 +85,12 @@ def main():
     while True:
 
         if not game_is_running:
-            text = pg.font.SysFont("Helveica Bold.ttf", 64).render("Game over!", True, (188, 214, 189))
+            text = pg.font.SysFont("assets/Candycolouredclown-x2vq.otf", 64).render("Game over!", True, (188, 214, 189))
             tr = text.get_rect()
             tr.center = (1200 / 2, 900 / 2)
             screen.blit(text, tr)
             pg.display.update()
-            pg.time.wait(2000)
+            pg.time.wait(3000)
             video.release()
             cv2.destroyAllWindows()
             pg.quit()
@@ -173,7 +178,12 @@ def main():
             for i in range(0, tiles):
                 screen.blit(bg, (i * bg_width + scroll, 0))
 
-            scroll -= 5
+            if count < 2000: 
+                for i in range(0, tiles):
+                    screen.blit(tut, ((i * bg_width + scroll, 0)))
+
+
+            scroll -= 8
             vertical_collision(frog)
             player.update()
             player.draw(screen)
@@ -219,6 +229,7 @@ def main():
         k = cv2.waitKey(1)
         if k == ord("q"):
             break
+        count += 1
 
 
 #video.release()
