@@ -42,13 +42,20 @@ def main():
     player = pg.sprite.GroupSingle()
     player.add(frog)
 
-    # always two obstacles being constantly updated 
     obstacle = pg.image.load("assets/reeds.png").convert_alpha()
     obstacle = pg.transform.rotozoom(obstacle, 0, 0.5)
-    obstacle_x = 700
-    obstacle_speed = 5
     obstacle2 = pg.image.load("assets/reeds.png").convert_alpha()
     obstacle2 = pg.transform.rotozoom(obstacle2, 0, 0.5)
+    obs_image = random.randint(0, 1)
+    if obs_image == 0:
+        obstacle = pg.image.load("assets/rock.png").convert_alpha()
+        obstacle = pg.transform.rotozoom(obstacle, 0, 0.45)
+    else: 
+        obstacle2 = pg.image.load("assets/rock.png").convert_alpha()
+        obstacle2 = pg.transform.rotozoom(obstacle2, 0, 0.45)
+    # always two obstacles being constantly updated 
+    obstacle_x = 700
+    obstacle_speed = 5
     obstacle2_x = 1100
 
 
@@ -72,6 +79,7 @@ def main():
         # obstacle updating 
         if(abs(obstacle_x - obstacle2_x) < 200):
             obstacle2_x += 150
+
         o_rect = screen.blit(obstacle, (obstacle_x, 360))
         obstacle_x -= obstacle_speed
         obstacle_rand = random.randint(1200, 1300)
