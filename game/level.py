@@ -9,7 +9,7 @@ SCREEN_HEIGHT = 600 #probs should change
 
 screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-bg = pg.image.load("game/assets/lilypad.png").convert()
+bg = pg.image.load("assets/lilypad.png").convert()
 bg_width = bg.get_width()
 
 scroll = 0
@@ -24,12 +24,12 @@ while run:
 
     scroll -= 5
 
-    if abs(scroll > bg_width):
+    if abs(scroll) > bg_width:
         scroll = 0
 
     for event in pg.event.get():
         if event.type == pg.QUIT:
             run = False
 
-pg.display.update()
+    pg.display.update()
 pg.quit()
