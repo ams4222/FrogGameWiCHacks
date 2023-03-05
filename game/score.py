@@ -34,12 +34,11 @@ class Scoreboard():
         else:
             self.rect.top = y
 
-    def draw(self):
+    def draw(self, screen):
         screen.blit(self.image, self.rect)
     
     def update(self, score):
         score_digits = extractDigits(score)
-        self.image.fill(backgroundColor)
         for s in score_digits:
             self.image.blit(self.scre_img[s], self.screrect)
             self.screrect.left += self.screrect.width

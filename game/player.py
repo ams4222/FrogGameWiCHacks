@@ -32,8 +32,8 @@ class Player(pg.sprite.Sprite):
         self.speed = pg.math.Vector2()
         self.speed.x = 6
         self.speed.y = 6
-        self.gravity = 0.8
-        self.jump_speed = -18
+        self.gravity = 0.5
+        self.jump_speed = -16
 
         self.on_floor = False
         self.on_ceiling = False
@@ -71,8 +71,9 @@ class Player(pg.sprite.Sprite):
         keys = pg.key.get_pressed()
         self.direction.x = 0
         if keys[pg.K_SPACE]:
-            if(self.on_floor):
-                self.jump()
+            # if(self.on_floor):
+            #     self.jump()
+            pass
         if keys[pg.K_u]:
             self.swimming = True
             if(self.on_floor):
@@ -86,16 +87,16 @@ class Player(pg.sprite.Sprite):
 
     def jump(self):
         self.direction.y = self.jump_speed 
-        self.gravity = 0.8
+        self.gravity = 0.5
     
     def down(self):
         self.direction.y = -self.jump_speed 
-        self.gravity = -0.8
+        self.gravity = -0.5
 
     #update function that implements all above functions to properly run the player class
 
     def update(self):
-        self.key_input()
+        #self.key_input()
         if self.direction.x and self.direction.y != 0:
            self.is_animating == True
            self.current_sprite += 0.8
