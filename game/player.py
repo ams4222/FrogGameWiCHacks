@@ -12,17 +12,17 @@ class Player(pg.sprite.Sprite):
 
         self.sprites = []
         size = (50, 50)
-        self.sprites.append(pg.transform.scale(pg.image.load(''), size))
-        self.sprites.append(pg.transform.scale(pg.image.load(''), size))
-        self.sprites.append(pg.transform.scale(pg.image.load(''), size))
-        self.sprites.append(pg.transform.scale(pg.image.load(''), size))
+        self.sprites.append(pg.transform.scale(pg.image.load('assets/froggy.png'), size))
+        self.sprites.append(pg.transform.scale(pg.image.load('assets/froggy.png'), size))
+        self.sprites.append(pg.transform.scale(pg.image.load('assets/froggy.png'), size))
+        self.sprites.append(pg.transform.scale(pg.image.load('assets/froggy.png'), size))
         
         self.current_sprite = 0
         self.image = self.sprites[self.current_sprite]
         
         #loads idle image and makes sure the player is touching ground
 
-        self.image = pg.image.load("").convert_alpha()
+        self.image = pg.image.load("assets/froggy.png").convert_alpha()
         self.image = pg.transform.rotozoom(self.image, 0, ((tile_size/2)/14))
         self.rect = self.image.get_rect(topleft = pos)
 
@@ -60,7 +60,7 @@ class Player(pg.sprite.Sprite):
             if self.direction.x != 0:
                 self.status = self.animate()
             else:
-                self.status = ''
+                self.status = 'assets/froggy.png'
         
 
     #animation function that makes sure it is always animating
