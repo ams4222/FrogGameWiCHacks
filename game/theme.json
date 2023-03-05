@@ -1,0 +1,45 @@
+{
+    "defaults": {
+        "colours": {
+            "normal_bg": "#332244",
+            "hovered_bg": "#5566AB",
+            "disabled_bg": "#b3aa9d",
+            "selected_bg": "#384f96",
+            "normal_text": "#ffe0e1",
+            "hovered_text": "#ffedee",
+            "selected_text": "#efdeff",
+            "link_text": "#c45b4c",
+            "link_hover": "#cf944f",
+            "link_selected": "#384f96",
+            "text_shadow": "#777777",
+            "normal_border": "#332244",
+            "hovered_border": "#5566AB",
+            "disabled_border": "#b3aa9d",
+            "selected_border": "#384f96",
+            "active_border": "#384f96",
+            "filled_bar": "#f4251b",
+            "unfilled_bar": "#CCCCCC",
+            "dark_bg": "#281a36"
+        }
+    },
+    "text_box": {
+        "font": {
+            "name": "dogica",
+            "size": 20,
+            "style": "regular",
+            "regular_path": "assets/Candycolouredclown-x2vq.otf"
+        }
+    },
+    "label":{
+        "colours":{
+           "normal_text": "#000000" 
+        }, 
+        "font":{
+            "name": "candy",
+            "size": "50", 
+            "bold": 0,
+            "regular_path": "assets/Candycolouredclown-x2vq.otf",
+            "bold_path": "assets/Candycolouredclown-x2vq.otf"
+        }
+    }
+}
