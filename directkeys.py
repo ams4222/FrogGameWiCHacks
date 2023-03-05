@@ -2,7 +2,7 @@ import ctypes
 import time
 
 #basically what happens in keys get pressed instead
-SendInput = ctypes.wind11.user32.SendInput
+SendInput = ctypes.windll.user32.SendInput
 
 space_pressed = 0x39
 
