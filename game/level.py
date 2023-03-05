@@ -1,6 +1,7 @@
 import pygame as pg
 import math
 import player as p
+import random
 
 clock = pg.time.Clock()
 FPS = 60
@@ -38,6 +39,15 @@ def main():
     player = pg.sprite.GroupSingle()
     player.add(frog)
 
+    # always two obstacles being constantly updated 
+    obstacle = pg.image.load("assets/reeds.png")
+    obstacle = pg.transform.rotozoom(obstacle, 0, 0.7)
+    obstacle_x = 700
+    obstacle_speed = 5
+    obstacle2 = pg.image.load("assets/reeds.png")
+    obstacle2 = pg.transform.rotozoom(obstacle2, 0, 0.7)
+    obstacle2_x = 1100
+
 
     run = True
     while run:
@@ -51,8 +61,23 @@ def main():
         vertical_collision(frog)
         player.update()
         player.draw(screen)
+
         if abs(scroll) > bg_width:
             scroll = 0
+
+        # obstacle updating 
+        if(abs(obstacle_x - obstacle2_x) < 200):
+            obstacle2_x += 150
+        screen.blit(obstacle, (obstacle_x, 320))
+        obstacle_x -= obstacle_speed
+        obstacle_rand = random.randint(1200, 1300)
+        if obstacle_x < -300:
+            obstacle_x = obstacle_rand
+        screen.blit(obstacle2, (obstacle2_x, 320))
+        obstacle2_x -= obstacle_speed
+        if obstacle2_x < -300:
+            obstacle2_x = obstacle_rand + 100
+    
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 run = False
