@@ -48,11 +48,11 @@ def main():
 
     # always two obstacles being constantly updated 
     obstacle = pg.image.load("assets/reeds.png").convert_alpha()
-    obstacle = pg.transform.rotozoom(obstacle, 0, 0.7)
+    obstacle = pg.transform.rotozoom(obstacle, 0, 0.5)
     obstacle_x = 700
     obstacle_speed = 5
     obstacle2 = pg.image.load("assets/reeds.png").convert_alpha()
-    obstacle2 = pg.transform.rotozoom(obstacle2, 0, 0.7)
+    obstacle2 = pg.transform.rotozoom(obstacle2, 0, 0.5)
     obstacle2_x = 1100
 
     detector = HandDetector(detectionCon = 0.8, maxHands = 1)
@@ -184,12 +184,12 @@ def main():
             # obstacle updating 
             if(abs(obstacle_x - obstacle2_x) < 200):
                 obstacle2_x += 150
-            o_rect = screen.blit(obstacle, (obstacle_x, 320))
+            o_rect = screen.blit(obstacle, (obstacle_x, 360))
             obstacle_x -= obstacle_speed
             obstacle_rand = random.randint(1200, 1300)
             if obstacle_x < -300:
                 obstacle_x = obstacle_rand
-            o2_rect = screen.blit(obstacle2, (obstacle2_x, 320))
+            o2_rect = screen.blit(obstacle2, (obstacle2_x, 360))
             obstacle2_x -= obstacle_speed
             if obstacle2_x < -300:
                 obstacle2_x = obstacle_rand + 100
