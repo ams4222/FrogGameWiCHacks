@@ -1,7 +1,7 @@
 import pygame as pg
 
-SCREEN_WIDTH = 1000
-SCREEN_HEIGHT = 600
+SCREEN_WIDTH = 1200
+SCREEN_HEIGHT = 900
 
 def extractDigits(num):
     if num > -1:
