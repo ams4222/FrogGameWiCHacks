@@ -33,7 +33,7 @@ class Player(pg.sprite.Sprite):
         self.speed.x = 6
         self.speed.y = 6
         self.gravity = 0.8
-        self.jump_speed = -14
+        self.jump_speed = -18
 
         self.on_floor = False
         self.on_ceiling = False
@@ -43,10 +43,6 @@ class Player(pg.sprite.Sprite):
 
         #status of player for animation
 
-        self.on_right = False
-        self.on_left = False
-        self.on_ceiling = False
-        self.on_floor = False
         self.facing_right = True
         self.swimming = False
 
@@ -75,10 +71,12 @@ class Player(pg.sprite.Sprite):
         keys = pg.key.get_pressed()
         self.direction.x = 0
         if keys[pg.K_SPACE]:
-            self.jump()
+            if(self.on_floor):
+                self.jump()
         if keys[pg.K_u]:
             self.swimming = True
-            self.down()
+            if(self.on_floor):
+                self.down()
     
     #gravity for player
 

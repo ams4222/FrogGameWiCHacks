@@ -22,6 +22,8 @@ def vertical_collision(player):
         player.rect.bottom = FLOOR
         player.direction.y = 0
         player.on_floor = True
+    if player.on_floor and player.direction.y < 0 or player.direction.y > 1: 
+            player.on_floor = False
 
 
 
