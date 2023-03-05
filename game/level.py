@@ -10,15 +10,17 @@ SCREEN_HEIGHT = 900 #probs should change
 
 def vertical_collision(player): 
     player.update_gravity()
-    print(player.rect.bottom)
     if player.rect.bottom > 875 and not player.swimming: 
         player.rect.bottom = 875
         player.direction.y = 0
         player.on_floor = True
-    if player.rect.bottom > 1000 and player.swimming:
+    if player.rect.bottom < 875 and player.swimming:
         player.swimming = False
+        player.gravity = 0.8
         player.rect.bottom = 875
         player.direction.y = 0
+        player.on_floor = True
+
 
 
 

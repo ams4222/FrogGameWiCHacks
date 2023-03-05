@@ -92,7 +92,7 @@ class Player(pg.sprite.Sprite):
     
     def down(self):
         self.direction.y = -self.jump_speed 
-        self.gravity = 0.8
+        self.gravity = -0.8
 
     #update function that implements all above functions to properly run the player class
 
