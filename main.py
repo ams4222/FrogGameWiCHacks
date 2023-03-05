@@ -36,6 +36,7 @@ def main():
     screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
     bg = pg.image.load("assets/scrollbackground.png").convert()
+    startscreen = pg.image.load("assets/start.png").convert()
     bg_width = bg.get_width()
 
     scroll = 0
@@ -75,7 +76,9 @@ def main():
 
 
     #creates the frame with video to detect hand
+    start = True
     while True:
+
         if not game_is_running:
             text = pg.font.SysFont("Helveica Bold.ttf", 64).render("Game over!", True, (188, 214, 189))
             tr = text.get_rect()
@@ -99,6 +102,7 @@ def main():
 
         spaceevent = pg.event.Event(pg.KEYDOWN, unicode="0", key=pg.K_SPACE, mod=pg.KMOD_NONE) 
         uevent = pg.event.Event(pg.KEYDOWN, unicode="u", key=pg.K_u, mod=pg.KMOD_NONE) 
+        kevent = pg.event.Event(pg.KEYDOWN, unicode="k", key=pg.K_k, mod=pg.KMOD_NONE) 
 
         imgScaled = cv2.resize(img, (0, 0), None, 0.533, 0.533)
 
@@ -124,6 +128,7 @@ def main():
                 current_key_pressed.add(0x25)
                 key_pressed = True
                 key_count = key_count + 1
+                pg.event.post(kevent)
             if fingerUp == [1, 1, 1, 1, 1]:
                 cv2.putText(imgScaled, "Finger Count: 5", (0, 200),cv2.FONT_HERSHEY_COMPLEX, 1, (188, 214, 189), 1, cv2.LINE_AA)
                 cv2.putText(imgScaled, "Jumping", (0, 150),cv2.FONT_HERSHEY_COMPLEX, 1, (188, 214, 189), 1, cv2.LINE_AA)
@@ -155,36 +160,45 @@ def main():
 
         clock.tick(FPS)
 
-        for i in range(0, tiles):
+        if start: 
+            for i in range(0, tiles):
+                screen.blit(startscreen, (i * bg_width + scroll, 0))
+            
+            for event in pg.event.get(): 
+                if event.type == pg.KEYDOWN:
+                    if event.key == pg.K_k: 
+                        start = False
 
-            screen.blit(bg, (i * bg_width + scroll, 0))
+        if not start:
+            for i in range(0, tiles):
+                screen.blit(bg, (i * bg_width + scroll, 0))
 
-        scroll -= 5
-        vertical_collision(frog)
-        player.update()
-        player.draw(screen)
+            scroll -= 5
+            vertical_collision(frog)
+            player.update()
+            player.draw(screen)
 
-        if abs(scroll) > bg_width:
-            scroll = 0
+            if abs(scroll) > bg_width:
+                scroll = 0
 
-        # obstacle updating 
-        if(abs(obstacle_x - obstacle2_x) < 200):
-            obstacle2_x += 150
-        o_rect = screen.blit(obstacle, (obstacle_x, 320))
-        obstacle_x -= obstacle_speed
-        obstacle_rand = random.randint(1200, 1300)
-        if obstacle_x < -300:
-            obstacle_x = obstacle_rand
-        o2_rect = screen.blit(obstacle2, (obstacle2_x, 320))
-        obstacle2_x -= obstacle_speed
-        if obstacle2_x < -300:
-            obstacle2_x = obstacle_rand + 100
+            # obstacle updating 
+            if(abs(obstacle_x - obstacle2_x) < 200):
+                obstacle2_x += 150
+            o_rect = screen.blit(obstacle, (obstacle_x, 320))
+            obstacle_x -= obstacle_speed
+            obstacle_rand = random.randint(1200, 1300)
+            if obstacle_x < -300:
+                obstacle_x = obstacle_rand
+            o2_rect = screen.blit(obstacle2, (obstacle2_x, 320))
+            obstacle2_x -= obstacle_speed
+            if obstacle2_x < -300:
+                obstacle2_x = obstacle_rand + 100
 
-        # collision detection
-        frog_rect = frog.rect
-        if frog_rect.colliderect(o_rect) or frog_rect.colliderect(o2_rect):
-            print("collided")
-            #return
+            # collision detection
+            frog_rect = frog.rect
+            if frog_rect.colliderect(o_rect) or frog_rect.colliderect(o2_rect):
+                print("collided")
+                #return
 
         for event in pg.event.get():
             if event.type == pg.QUIT:
